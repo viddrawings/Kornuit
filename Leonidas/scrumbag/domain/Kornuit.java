@@ -8,10 +8,33 @@ import java.util.concurrent.TimeUnit;
 public class Kornuit {
     private String name;
     private String id;
+    private int ammountOfFeedLikes = 0;
+    private int ammountOfStatusLikes = 0;
+    private int messagesSent = 0;
+    private int ammountOfTags = 0;
+    private boolean wasLast = false;
+    public int getAmmountOfTags() {
+		return ammountOfTags;
+	}
+
+	public int getMessagesReceived() {
+		return messagesReceived;
+	}
+
+	public void setAmmountOfTags(int ammountOfTags) {
+		this.ammountOfTags = ammountOfTags;
+	}
+
+	public void setMessagesReceived(int messagesReceived) {
+		this.messagesReceived = messagesReceived;
+	}
+
+	private int messagesReceived = 0;
     private Date lastAppointment;
     private float score;
     private float[] scores = { 0f, // TIME
             0f, // FEEDLIKE
+            0f // IO message module
     };
     private boolean ignore;
  
@@ -96,4 +119,36 @@ public class Kornuit {
     public void setIgnore(boolean ignore) {
         this.ignore = ignore;
     }
+
+	public int getAmmountOfFeedLikes() {
+		return ammountOfFeedLikes;
+	}
+
+	public void setAmmountOfFeedLikes(int ammountOfFeedLikes) {
+		this.ammountOfFeedLikes = ammountOfFeedLikes;
+	}
+
+	public int getAmmountOfStatusLikes() {
+		return ammountOfStatusLikes;
+	}
+
+	public void setAmmountOfStatusLikes(int ammountOfStatusLikes) {
+		this.ammountOfStatusLikes = ammountOfStatusLikes;
+	}
+
+	public int getMessagesSent() {
+		return messagesSent;
+	}
+
+	public void setMessagesSent(int messagesSent) {
+		this.messagesSent = messagesSent;
+	}
+
+	public boolean isWasLast() {
+		return wasLast;
+	}
+
+	public void setWasLast(boolean wasLast) {
+		this.wasLast = wasLast;
+	}
 }

@@ -27,7 +27,7 @@ public class SessionInitializer implements HttpSessionListener {
 
 		Controller controller = new Controller();
 		session.getSession().setAttribute("leonidasController", controller);
-		System.out.println("SESSION HAS BEEN CREATED");
+		System.out.println("SESSON HAS BEEN CREATED");
 
 	}
 
@@ -67,7 +67,7 @@ public class SessionInitializer implements HttpSessionListener {
 		Map<String, User> users = (Map<String, User>) context
 				.getAttribute("users");
 		users.remove(username);
-		System.out.println("SESSION HAS BEEN DESTROYED");
+		System.out.println("SESSON HAS BEEN DESTROYED");
 
 	}
 

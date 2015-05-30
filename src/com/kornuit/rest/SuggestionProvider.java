@@ -15,6 +15,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import scrumbag.Controller;
+import scrumbag.domain.Kornuit;
 
 @Path("/SuggestionProvider/{accesstoken}")
 public class SuggestionProvider {
@@ -33,14 +34,14 @@ public class SuggestionProvider {
 
 		// Simulate user login
 
-		String winner = controller.makeSuggestion(validToken);
-		System.out.println("SUGGESTION: " + winner);
-		picture = "http://graph.facebook.com/" + winner + "/picture?type=large";
+		Kornuit winner = controller.makeSuggestion(validToken);
+		System.out.println("SUGGESTION: " + winner.getName());
+		picture = "http://graph.facebook.com/" + winner.getId() + "/picture?type=large";
 		StringBuffer buffer = null;
 
 		BufferedReader reader = null;
 		try {
-			URL url = new URL("https://graph.facebook.com/" + winner
+			URL url = new URL("https://graph.facebook.com/" + winner.getId()
 					+ "?&access_token=" + accessToken);
 			reader = new BufferedReader(new InputStreamReader(url.openStream()));
 			buffer = new StringBuffer();

@@ -39,6 +39,11 @@ public class ContextInitializer implements ServletContextListener{
 		Map<String, User> currentUsers = new HashMap<String, User>();
 		context.getServletContext().setAttribute("users", currentUsers);
 		
+		System.out.println("************************************************************************");
+		System.out.println("********Soms smeer ik pindakaas op mijn scrotum*************************");
+		System.out.println("***********En laat het mijn hond eraf likken.***************************");
+		System.out.println("************************************************************************");
+		
 		Controller controller = new Controller();
 		context.getServletContext().setAttribute("leonidasController", controller);
 		

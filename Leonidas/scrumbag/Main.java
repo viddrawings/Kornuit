@@ -1,18 +1,17 @@
 package scrumbag;
 
-
 public class Main {
 	private static Controller controller;
 
 	public static void main(String[] args) {
 
-			String accessToken = "CAAVvLje0a38BAKNteNeKUxI8Bhyg3NoCdxW2K2oyuRdgZAm2h5hqH"
-					+ "QX4XsRHS0AZABWCwQ7icbDp6gEkfU0XJHVooVH6belNfXPlayBZCZCQv7Yb7lJP"
-					+ "cvyp3ge8QNGcfC2k8ZAqgVOaRLtIWAJjoVGPUgvYqIMFkpnjJdx4KMfSmVovZCT"
-					+ "64N3aL9YUJZCvq3ud7ZABSC9qFck9QlQG0wEZB";
+		String accessToken = "CAAVvLje0a38BAH80qwafgbqAP2X1nSZAYTlWCnCpdwn1UJtb"
+				+ "cTOCPUg1YsGiJCzpT1nq1gx4ZBaC7ZCl5ssLdAei4Ql56UZBdEYzy7uVDnQD"
+				+ "oCSDOuWRDk8r76ZCglV4tWLh5ns0mdnNLcuMjcczC0PmnzWcnSVPcHmziHxq"
+				+ "xwdknTdjE5jKE8ZAPOEhKak8zLITef4Pb0CoHZAaZCkO11vo";
 
 		controller = new Controller();
-		String winner = controller.makeSuggestion(accessToken);
+		String winner = controller.makeSuggestion(accessToken).getName();
 		System.out.println("suggestion: " + winner);
 	}
 }

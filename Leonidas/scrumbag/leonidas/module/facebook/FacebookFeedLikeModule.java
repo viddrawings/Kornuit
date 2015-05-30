@@ -48,6 +48,7 @@ public class FacebookFeedLikeModule extends Module {
                         kornuit = controller.getKornuit(id);
                     }
                     kornuit.setScore(SCORE_INDEX, kornuit.getScore(SCORE_INDEX) + 1F);
+                    kornuit.setAmmountOfFeedLikes(kornuit.getAmmountOfFeedLikes() +1);
                     controller.addKornuit(kornuit);
                 }
             } catch (JSONException e) {

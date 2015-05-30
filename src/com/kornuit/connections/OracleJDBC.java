@@ -31,7 +31,7 @@ public class OracleJDBC {
 			System.out.println("Where is your Oracle JDBC Driver?");
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Oracle JDBC Driver Registered!");
 
 		Connection connection = null;
@@ -73,7 +73,7 @@ public class OracleJDBC {
 
 		Connection c = getConnectionOra(path);
 		PreparedStatement validateUser = c
-				.prepareStatement("SELECT * FROM ACCOUNT WHERE USERNAME = ? AND PASSWORD = ?");
+				.prepareStatement("SELECT * FROM KORNUIT_USER WHERE USERNAME = ? AND PASSWORD = ?");
 		validateUser.setString(1, username);
 		validateUser.setString(2, password);
 
