@@ -32,7 +32,9 @@ public class Kornuit {
 	private int messagesReceived = 0;
     private Date lastAppointment;
     private float score;
-    private float[] scores = { 0f, // TIME
+    private float[] scores = { 
+    		
+    		0f, // TIME
             0f, // FEEDLIKE
             0f // IO message module
     };
