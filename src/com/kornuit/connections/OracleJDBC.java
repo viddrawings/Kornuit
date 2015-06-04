@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import scrumbag.domain.Kornuit;
 
+import com.kornuit.calendar.Afspraak;
 import com.kornuit.util.SecurePropertyLoader;
 
 public class OracleJDBC {
@@ -255,5 +256,45 @@ public class OracleJDBC {
 		}
 		return alle_Kornuiten;
 		
+	}
+	
+public static List<Afspraak> getAfspraken(String path, String username) throws FileNotFoundException, IOException, SQLException {
+		
+		Connection c = getConnectionOra(path);
+		PreparedStatement query = c
+				.prepareStatement("SELECT * FROM KORNUIT_APPOINTMENT WHERE APP_USER = ?");
+		query.setString(1, username);
+		
+		ResultSet set = query.executeQuery();
+		List<Afspraak> alle_Afspraken = new ArrayList<Afspraak>();
+		while(set.next()){
+			Afspraak a = new Afspraak();
+			a.setId(set.getInt(1));
+			a.setUser(set.getString(2));
+			a.setDatumTijd(set.getTimestamp(3));
+			a.setLocatie(set.getString(4));
+			a.setActiviteit(set.getString(5));
+			a.setFacebookVriendId(set.getString(6));
+			a.setFacebookVriendNaam(set.getString(7));
+			
+			alle_Afspraken.add(a);
+		}
+		return alle_Afspraken;
+	}
+	
+	public static void nieuweAfspraak(String path, Afspraak afspraak) throws FileNotFoundException, IOException,
+			SQLException {
+		Connection c = getConnectionOra(path);
+		PreparedStatement query = c
+				.prepareStatement("INSERT INTO KORNUIT_APPOINTMENT (APP_ID, APP_USER, APP_TIME, APP_LOCATION, APP_ACTIVITY, APP_FRIEND_FACEBOOK_ID, APP_FRIEND_NAME)"
+						+ "VALUES(KORNUIT_APPOINTMENT_SEQ.nextval,?,?,?,?,?,?)");
+		query.setString(1, afspraak.getUser());
+		query.setTimestamp(2, afspraak.getDatumTijd());
+		query.setString(3, afspraak.getLocatie());
+		query.setString(4, afspraak.getActiviteit());
+		query.setString(5, afspraak.getFacebookVriendId());
+		query.setString(6, afspraak.getFacebookVriendNaam());
+		
+		query.execute();
 	}
 }

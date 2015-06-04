@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kornuit.calendar.Afspraak;
+import com.kornuit.calendar.CreateCalendarEvent;
 import com.kornuit.connections.FBConnection;
 import com.kornuit.connections.OracleJDBC;
 import com.kornuit.core.security.User;
@@ -68,7 +72,16 @@ public class TaskController {
 	}
 
 	@RequestMapping("mijnkornuit")
-	public String mijnKornuit() {
+	public String mijnKornuit(HttpServletRequest request,
+			HttpServletResponse response) throws FileNotFoundException, IOException, SQLException {
+		
+		String username = request.getSession().getAttribute("username").toString();
+		List<Afspraak> alle_afspraken = OracleJDBC.getAfspraken(
+				request.getSession().getServletContext()
+						.getRealPath("/properties/connections.properties"), username);
+		
+		request.setAttribute("afspraken", alle_afspraken);
+		
 		return "mijnkornuit";
 	}
 
@@ -164,6 +177,40 @@ public class TaskController {
 		}
 		request.getSession().invalidate();
 		return "login";
+	}
+	
+	@RequestMapping("makecalendarevent")
+	public String makecalendarevent(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, SQLException {
+		
+		String dateTimeInput = request.getParameter("sug_datetime");
+		dateTimeInput += ":0";
+		System.out.println("HALLOOOOOOOOOOOOOOOOOOOOO: " + dateTimeInput);
+		Timestamp stamp = Timestamp.valueOf(dateTimeInput.replace("T"," "));
+		
+		System.out.println("TETSTESTSETSETES: " + stamp);
+		Afspraak a = new Afspraak();
+		a.setActiviteit(request.getParameter("sug_activity"));
+		a.setDatumTijd(stamp);
+		a.setFacebookVriendId(request.getParameter("sug_id"));
+		a.setFacebookVriendNaam(request.getParameter("sug_name"));
+		a.setLocatie(request.getParameter("sug_location"));
+		a.setUser(request.getSession().getAttribute("username").toString());
+		
+		OracleJDBC.nieuweAfspraak(
+				context.getRealPath("/properties/connections.properties"), a);
+
+		if(request.getParameter("makeGE") != null) {
+			if(request.getParameter("makeGE").equals("YES")) {
+				CreateCalendarEvent event = new CreateCalendarEvent();
+				boolean isMade = event.createEvent(a);
+				System.out.println("IS ER EEN EVENT AANGEMAAKT: " + isMade);
+			} else {
+				System.out.println("ER IS GEEN EVENT AANGEMAAKT!");
+			}
+		}
+
+		return "suggestie";
 	}
 
 }

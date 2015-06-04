@@ -52,7 +52,7 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-
+					<li><a href="/Kornuit">Uitloggen</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -64,7 +64,7 @@
 		<div class="panel-heading"><%@ include file="facebookHeader.jsp"%></div>
 
 		<div class="panel-body">
-			<div class="col-md-3 well" style="margin: 5px;">
+			<div class="col-md-12 well">
 				<h4 style="color: darkblue">Groepen</h4>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 					Vestibulum sagittis pharetra vehicula. Morbi quis vehicula odio.
@@ -74,22 +74,79 @@
 					volutpat metus eget turpis fermentum, mollis dignissim diam
 					ullamcorper</p>
 					<br></br>
-					<a href="newgroup"><button type="submit" form="login" class="btn btn-info col-md-10">Maak een nieuwe groep aan</button></a>
+					<a href="newgroup"><button type="submit" form="login" class="btn btn-info col-md-4">Maak een nieuwe groep aan</button></a>
 					<br></br>
-					<a href="managegroups"><button type="submit" form="login" class="btn btn-info col-md-10">Wijzig een bestaande groep</button></a>
-			</div>
-
-			<div class="col-md-3 well" style="margin: 5px;">
+					<a href="managegroups"><button type="submit" form="login" class="btn btn-info col-md-4">Wijzig een bestaande groep</button></a>
+			</div><br><br><br>
+			
+			<div class="col-md-12 well">
 				<h4 style="color: darkblue">Afspraken</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Vestibulum sagittis pharetra vehicula. Morbi quis vehicula odio.
-					Cras eget nunc ullamcorper, placerat mauris vitae, lobortis magna.
-					Quisque eu purus nec lectus congue condimentum. Maecenas porttitor
-					iaculis neque, tincidunt pulvinar nulla rhoncus posuere. Sed
-					volutpat metus eget turpis fermentum, mollis dignissim diam
-					ullamcorper</p>
-					<br></br>
-					<a href="manageafspraak"><button type="submit" form="login" class="btn btn-info col-md-10">Wijzig een bestaande afspraak</button></a>
+				<p>Hier zijn alle afspraken te zien die je heb gemaakt!</p><br>
+
+					<div class="row">
+					
+			<%@ page import="java.util.List" %>
+			<%@ page import="com.kornuit.calendar.Afspraak" %>
+			
+			<%
+				List<Afspraak> alle_afspraken;
+				if (request.getAttribute("afspraken") != null) {	
+					alle_afspraken = (List<Afspraak>) request.getAttribute("afspraken");
+					
+					for (Afspraak a : alle_afspraken) { 
+						String url = "https://graph.facebook.com/" + a.getFacebookVriendId() + "/picture?type=large";
+						String modalId = "modal" + a.getId();
+					%>
+						
+						<div class="col-sm-6 col-md-3">
+					    <div class="thumbnail">
+					      <img src=<%=url%> alt="thumbnail" style="width: 300px; height: 300px;" data-toggle="modal" data-target=<%="#" + modalId%>>
+					      <div class="caption">
+					        <h3>Afspraak met:<br>
+					        <%=a.getFacebookVriendNaam()%></h3>
+					        <p><%=a.getActiviteit()%></p><br>
+					        <p>
+					        	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=<%="#" + modalId%>>Meer info</button>
+				        		<a href="#" class="btn btn-danger" role="button">Afspraak annuleren</a>
+				        	</p>
+					      </div>
+					    </div>
+					  </div>
+					  
+					  
+					  <!-- Modal -->
+						<div id=<%=modalId%> class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title">Afspraak met: <%=a.getFacebookVriendNaam()%></h4>
+						      </div>
+						      <div class="modal-body">
+						      	<center>
+						      		<img src=<%=url%> alt="thumbnail" style="width: 400px; height: 400px;">
+					      		</center><br><br>
+						      	<p><b>Activiteit:</b> <%=a.getActiviteit()%></p>
+						        <p><b>Locatie:</b> <%=a.getLocatie()%></p>
+						        <p><b>Datum & Tijd:</b> <%=a.getDatumTijd()%></p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+						      </div>
+						    </div>
+						
+						  </div>
+						</div>
+					  
+			<%
+					}
+				}
+			%>
+			
+					</div>
+					<br>
 			</div>
 		</div>
 	</div>

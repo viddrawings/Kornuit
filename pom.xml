@@ -38,15 +38,20 @@
 			<artifactId>spring-web</artifactId>
 			<version>4.1.1.RELEASE</version>
 		</dependency>
-
-
-
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- DEZE WIL TIM PC :S
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>-->
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -65,6 +70,19 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20141113</version>
+		</dependency>
+		
+		<!-- GOOGLE CALENDAR -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev125-1.20.0</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-jetty</artifactId>
+			<version>1.20.0</version>
 		</dependency>
 
 	</dependencies>

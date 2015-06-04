@@ -24,6 +24,15 @@ if(null!=request.getSession().getAttribute("fbTokenValue")){
         <script>
             var is_loading = false;
             var cloned_item;
+            
+            $(document).ready(function() {
+            	//document.getElementById("sug_activity").style.visibility = "hidden";
+            	//document.getElementById("sug_location").style.visibility = "hidden";
+            	//document.getElementById("sug_datetime").style.visibility = "hidden";
+            	//document.getElementById("makeGE").style.visibility = "hidden";
+            	document.getElementById("maakAfspraak").style.display = "none";
+            });
+           
         </script>
         <style>
             @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -112,7 +121,8 @@ if(null!=request.getSession().getAttribute("fbTokenValue")){
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    </ul>
+					<li><a href="/Kornuit">Uitloggen</a></li>
+				</ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
@@ -130,10 +140,21 @@ if(null!=request.getSession().getAttribute("fbTokenValue")){
                             <div id="container_picture">
                             <img src="http://static1.squarespace.com/static/52cd93f2e4b0f7eaa440bd2f/t/53f11166e4b020d5c7fc813a/1389303414935/placeholder.gif" id="picture_content"/>
                             </div>
-                           <br> </br>
+                           <br><br>
                             <p id="sug_content">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis pharetra vehicula. Morbi quis vehicula odio. Cras eget nunc ullamcorper, placerat mauris vitae, lobortis magna. Quisque eu purus nec lectus congue condimentum. Maecenas porttitor iaculis neque, tincidunt pulvinar nulla rhoncus posuere. Sed volutpat metus eget turpis fermentum, mollis dignissim diam ullamcorper
                             </p>
+                            <div id="maakAfspraak">
+	                            <form action="makecalendarevent">
+	                            	<input type="hidden" id="sug_name" name="sug_name" value="" />
+	                            	<input type="hidden" id="sug_id" name="sug_id" value="" />
+	                            	<input type="text" id="sug_activity" name="sug_activity" placeholder="Activiteit" class="form-control" /><br>
+	                            	<input type="text" id="sug_location" name="sug_location" placeholder="Locatie" class="form-control" /><br>
+	                            	<input type="datetime-local" id="sug_datetime" name="sug_datetime" class="form-control" /><br>
+	                            	<input type="checkbox" id="makeGE" name="makeGE" value="YES"> Maak Google Calendar Event aan<br><br>
+								    <input type="submit" value="Maak Afspraak" id="calendar" class="btn btn-info">
+								</form><br>
+							</div>
                             <button id="json" type="button" class="btn btn-info" onclick="play_animation()">Nieuwe suggestie</button>
                         </div>
                     </div>
@@ -143,6 +164,8 @@ if(null!=request.getSession().getAttribute("fbTokenValue")){
     </body>
     
     <script>
+    
+    
     function play_animation() {
 
         is_loading = true;
@@ -247,6 +270,17 @@ if(null!=request.getSession().getAttribute("fbTokenValue")){
             x.appendChild(cloned_item);
             document.getElementById("container_picture").appendChild(a);
             document.getElementById("sug_head").innerHTML = json.name;
+            document.getElementById('sug_name').value = json.name;
+            
+            var id = json.payload.match(/\d/g);
+        	id = id.join("");
+        	document.getElementById('sug_id').value = id;
+            
+            //document.getElementById("sug_activity").style.visibility = "visible";
+            //document.getElementById("sug_location").style.visibility = "visible";
+            //document.getElementById("sug_datetime").style.visibility = "visible";
+            //document.getElementById("makeGE").style.visibility = "visible";
+            document.getElementById("maakAfspraak").style.display = "inline";
             
             console.log(json.payload);
 
