@@ -18,6 +18,10 @@ public class FBConnection {
 	static String accessToken = "";
 	//private String accessToken = "";
 
+	/**
+	 * Connects to FaceBook and retrieves a code that will be used in the authentication process.
+	 * @return FaceBook code as String
+	 */
 	public String getFBAuthUrl() {
 		String fbLoginUrl = "";
 		try {
@@ -31,6 +35,11 @@ public class FBConnection {
 		return fbLoginUrl;
 	}
 
+	/**
+	 * Creates the URL for retrieving the user's FaceBook information.
+	 * @param code FaceBook code as a String
+	 * @return URL to retrieve user's FaceBook information
+	 */
 	public String getFBGraphUrl(String code) {
 		String fbGraphUrl = "";
 		try {
@@ -44,6 +53,11 @@ public class FBConnection {
 		return fbGraphUrl;
 	}
 	
+	/**
+	 * Creates the URL for retrieving the FaceBook access token.
+	 * @param code FaceBook code as a String
+	 * @return URL to retrieve FaceBook access token
+	 */
 	public String tokenBuilder(String code){
 		String fbGraphUrl = "";
 		try {
@@ -57,6 +71,11 @@ public class FBConnection {
 		return fbGraphUrl;
 	}
 
+	/**
+	 * Delimits FaceBook access token and checks if it is still valid, after that the access token will be returned.
+	 * @param code FaceBook code as a String
+	 * @return Access token as a String
+	 */
 	public String getAccessToken(String code) {
 		System.out.println("MIJNE ACCESSCODE: " + accessToken);
 		if ("".equals(accessToken)) {

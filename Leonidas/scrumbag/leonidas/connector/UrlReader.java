@@ -22,6 +22,13 @@ public class UrlReader {
 		return sb.toString();
 	}
 
+	/**
+	 * Connects to FaceBook to get information from given URL, and returns that in a JSON object.
+	 * @param url String url to read from
+	 * @return JSONObject json
+	 * @throws IOException throws IOException
+	 * @throws JSONException throws JSONException
+	 */
 	public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
 		InputStream is = new URL(url).openStream();
 		try {

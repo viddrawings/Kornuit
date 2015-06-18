@@ -15,6 +15,9 @@ public class FacebookFeedLikeModule extends Module {
         SCORE_INDEX = 1;
     }
  
+    /**
+     * Retrieves all 'Kornuiten' and calculates their score based on feed likes. When done it places them in the controller.
+     */
     @Override
     public void calculate(Controller controller, String accessToken) {
         // Get a json object from facebook

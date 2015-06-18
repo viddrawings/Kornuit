@@ -28,6 +28,10 @@ public class Controller {
 	private List<Module> modules;
 	private List<Kornuit> kornuiten;
 
+	/**
+	 * Writes all 'Kornuiten' with their scores to a csv file.
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 */
 	public void writeToFile() throws FileNotFoundException{
 		File f = new File("resultaten.csv");
 		PrintWriter pw = new PrintWriter(f);
@@ -76,6 +80,10 @@ public class Controller {
 		kornuiten = new ArrayList<Kornuit>();
 	}
 
+	/**
+	 * Updates all scores for all 'Kornuiten'.
+	 * @param accessToken String accessToken
+	 */
 	public void updateScores(String accessToken) {
 		System.out.println("Updating kornuit scores");
 		System.out.println("AANTAL KORNUITEN = " + kornuiten.size());
@@ -113,6 +121,11 @@ public class Controller {
 		});
 	}
 
+	/**
+	 * Retrieves all information and calls method to make a new suggestion.
+	 * @param accessToken String accessToken
+	 * @return Kornuit suggestion
+	 */
 	public Kornuit makeSuggestion(String accessToken) {
 		updateScores(accessToken);
 		// return last kornuit (has highest score)
@@ -126,6 +139,11 @@ public class Controller {
 		return tempKornuit;
 	}
 
+	/**
+	 * Retrieves all 'Kornuiten' and ranks them based on their score.
+	 * @param number Integer number of 'Kornuiten' it has to rank, for example top 3, or top 10
+	 * @return List with ranked 'Kornuiten'
+	 */
 	public List<Kornuit> giveTop(int number) {
 		int size = kornuiten.size() - 1;
 		List<Kornuit> topKornuiten = new ArrayList<Kornuit>();
@@ -142,6 +160,10 @@ public class Controller {
 		return kornuiten;
 	}
 
+	/**
+	 * Add a new module that will be used with making a suggestion
+	 * @param module New module object
+	 */
 	public void addModule(Module module) {
 		if (!modules.contains(module)) {
 			modules.add(module);

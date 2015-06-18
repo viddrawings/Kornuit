@@ -10,6 +10,9 @@ import scrumbag.leonidas.module.Module;
 public class FacebookMessageInModule extends Module {
 	private static final String FIELD = "/me?fields=inbox{from}";
 
+	/**
+	 * Retrieves all 'Kornuiten' and calculates their score based on FaceBook messages. When done it places them in the controller.
+	 */
 	@Override
 	public void calculate(Controller controller, String accessToken) {
 

@@ -22,6 +22,9 @@ public class SecurityFilter implements Filter {
 		this.context.log("AuthenticationFilter initialized MODDERFOKKER");
 	}
 
+	/**
+	 * Checks if user has logged in, if user had not logged in, it forwards to the home page.
+	 */
 	@SuppressWarnings("unchecked")
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {

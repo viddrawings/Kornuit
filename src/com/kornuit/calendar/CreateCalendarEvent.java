@@ -59,7 +59,7 @@ public class CreateCalendarEvent {
     /**
      * Creates an authorized Credential object.
      * @return an authorized Credential object.
-     * @throws IOException
+     * @throws IOException throws IOException
      */
     public Credential authorize() throws IOException {
         // Load client secrets.
@@ -85,7 +85,7 @@ public class CreateCalendarEvent {
     /**
      * Build and return an authorized Calendar client service.
      * @return an authorized Calendar client service
-     * @throws IOException
+     * @throws IOException throws IOException
      */
     public com.google.api.services.calendar.Calendar
         getCalendarService() throws IOException {
@@ -96,6 +96,12 @@ public class CreateCalendarEvent {
                 .build();
     }
 
+    /**
+     * Creates a new event that contains all appointment details in the user Google calendar 
+     * @param a New afspraak object
+     * @return boolean if event has been created or not
+     * @throws IOException throws IOException
+     */
     public boolean createEvent(Afspraak a) throws IOException {
     	
         try {

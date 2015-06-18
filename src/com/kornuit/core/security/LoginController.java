@@ -30,6 +30,18 @@ public class LoginController {
 	@Autowired
 	ServletContext context;
 
+	/**
+	 * Checks if the received username and password are valid, and returns a ModelAndView depending on if the username and password are valid.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @param username String username
+	 * @param password String password
+	 * @return ModelAndView
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws SQLException throws SQLException
+	 * @throws IOException throws IOException
+	 * @throws ServletException throws ServletException
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("securelogin")
 	public ModelAndView login(HttpServletRequest request,
@@ -121,7 +133,14 @@ public class LoginController {
 		return MV;
 	}
 
-	
+	/**
+	 * Checks if logged in user has made a connection with either FaceBook, Google or Twitter, if true it sets the tokens in the session.
+	 * @param request HttpServletRequest
+	 * @param username String username
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws SQLException throws SQLException
+	 * @throws IOException throws IOException
+	 */
 	public void setMediaContent(HttpServletRequest request, String username)
 			throws FileNotFoundException, SQLException, IOException {
 
@@ -178,6 +197,14 @@ public class LoginController {
 
 	}
 
+	/**
+	 * Retrieves all 'Kornuiten' and sets these.
+	 * @param username String username
+	 * @param request HttpServletRequest request
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public void populateKornuit(String username, HttpServletRequest request)
 			throws FileNotFoundException, IOException, SQLException {
 

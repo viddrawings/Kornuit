@@ -14,6 +14,9 @@ public class FacebookIgnoreModule extends Module {
 	public FacebookIgnoreModule () {
 	}
 
+	/**
+	 * Retrieves all 'Kornuiten' and checks if they are family or relatives. If true they will not be added to the controller.
+	 */
 	@Override
 	public void calculate(Controller controller, String accessToken) {
 		JSONObject root = getJsonObject(accessToken, FIELD);

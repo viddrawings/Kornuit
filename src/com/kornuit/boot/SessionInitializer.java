@@ -17,7 +17,7 @@ import com.kornuit.core.security.User;
 
 /**
  * 
- * @author Mark Stroeven & Tim Ijpenga
+ * @author Mark Stroeven and Tim Ijpenga
  *
  */
 public class SessionInitializer implements HttpSessionListener {

@@ -30,7 +30,12 @@ public abstract class Module {
             e.printStackTrace();
         }
     }
-     
+    /**
+     * Connects to FaceBook to retrieve a certain field from user.
+     * @param accessToken String accessToken
+     * @param FIELD String field name to retrieve
+     * @return JSONObject
+     */
     public JSONObject getJsonObject(String accessToken, String FIELD) {
         System.out.println("Connecting to facebook to get json...");
         try {
@@ -49,6 +54,11 @@ public abstract class Module {
         return null;
     }
  
+    /**
+     * Sorts all 'Kornuiten' based on their score ascending.
+     * @param kornuiten List with all unsorted 'Kornuiten'
+     * @return List with all sorted 'Kornuiten'
+     */
     public List<Kornuit> sortKornuiten(List<Kornuit> kornuiten) {
         // Sort all kornuiten on their scores (ascending)
         Collections.sort(kornuiten, new Comparator<Kornuit>() {

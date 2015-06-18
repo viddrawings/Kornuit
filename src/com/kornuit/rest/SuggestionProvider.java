@@ -22,6 +22,14 @@ public class SuggestionProvider {
 
 	private String picture;
 
+	/**
+	 * Calls the algorithm to provide a new suggestion.
+	 * @param accessToken String with access token
+	 * @param request HttpServletRequest request
+	 * @return String that contains suggestion's name and profile picture URL.
+	 * @throws JSONException throws JSONException
+	 * @throws IOException throws IOException
+	 */
 	@GET
 	public String getSuggestion(@PathParam("accesstoken") String accessToken, @Context HttpServletRequest request)
 			throws JSONException, IOException {

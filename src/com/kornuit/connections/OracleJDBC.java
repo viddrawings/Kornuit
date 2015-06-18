@@ -19,6 +19,13 @@ import com.kornuit.util.SecurePropertyLoader;
 
 public class OracleJDBC {
 
+	/**
+	 * Connect to the database.
+	 * @param path Connection path to database
+	 * @return Connection object
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 */
 	public static Connection getConnectionOra(String path)
 			throws FileNotFoundException, IOException {
 		System.out.println("-------- Oracle JDBC Connection Testing ------");
@@ -68,6 +75,16 @@ public class OracleJDBC {
 		return null;
 	}
 
+	/**
+	 * Validates username and password in database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @param password String password
+	 * @return boolean if username and password are valid
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static boolean validateUser(String path, String username,
 			String password) throws SQLException, FileNotFoundException,
 			IOException {
@@ -104,6 +121,15 @@ public class OracleJDBC {
 		return true;
 	}
 
+	/**
+	 * Checks id the given user has linked his FaceBook account in the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @return boolean if user has linked his FaceBook account
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static boolean hasFacebookToken(String path, String username)
 			throws SQLException, FileNotFoundException, IOException {
 
@@ -122,6 +148,15 @@ public class OracleJDBC {
 
 	}
 
+	/**
+	 * Checks id the given user has linked his Twitter account in the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @return boolean if user has linked his Twitter account
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static boolean hasTwitterToken(String path, String username)
 			throws SQLException, FileNotFoundException, IOException {
 
@@ -140,6 +175,15 @@ public class OracleJDBC {
 
 	}
 
+	/**
+	 * Checks id the given user has linked his Google account in the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @return boolean if user has linked his Google account
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static boolean hasGoogleToken(String path, String username)
 			throws FileNotFoundException, IOException, SQLException {
 		Connection c = getConnectionOra(path);
@@ -156,6 +200,16 @@ public class OracleJDBC {
 		}
 	}
 
+	/**
+	 * Retrieves an access token of the given user from the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @param type String type of access token, example FaceBook or Google
+	 * @return String Access token as a String
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static String getToken(String path, String username, String type)
 			throws FileNotFoundException, IOException, SQLException {
 		System.out.println("PREPARING TO RETURN TOKEN");
@@ -173,6 +227,16 @@ public class OracleJDBC {
 		return null;
 	}
 
+	/**
+	 * Saves an access token from a user in the database.
+	 * @param path Connection path to database
+	 * @param token String the access token that has to be saved
+	 * @param type String type of access token, example FaceBook or Google
+	 * @param username String username
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static void saveToken(String path, String token, String type,
 			String username) throws FileNotFoundException, IOException,
 			SQLException {
@@ -185,6 +249,15 @@ public class OracleJDBC {
 		query.execute();
 	}
 
+	/**
+	 * Deletes an access token from a user in the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @param type String type of access token, example FaceBook or Google
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static void deleteToken(String path, String username, String type)
 			throws SQLException, FileNotFoundException, IOException {
 		Connection c = getConnectionOra(path);
@@ -195,7 +268,16 @@ public class OracleJDBC {
 		query.execute();
 	}
 
-	public static void saveKornuit(String path, String usernamem,
+	/**
+	 * Will save a new List with all 'Kornuiten' to the database.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @param all_kornuiten List with all 'Kornuiten' of a certain user
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
+	public static void saveKornuit(String path, String username,
 			List<Kornuit> all_kornuiten) throws FileNotFoundException,
 			IOException, SQLException {
 		Connection c = getConnectionOra(path);
@@ -217,7 +299,7 @@ public class OracleJDBC {
 				query.setFloat(4, k.getScore());
 				String ignored = k.isIgnored() ? "Y" : "N";
 				query.setString(5, ignored);
-				query.setString(6, usernamem);
+				query.setString(6, username);
 
 				query.execute();
 			} catch (java.sql.SQLIntegrityConstraintViolationException e) {
@@ -228,6 +310,15 @@ public class OracleJDBC {
 
 	}
 
+	/**
+	 * Retrieves all 'Kornuiten' of the given user.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @return List with all 'Kornuiten' of a certain user
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static List<Kornuit> getKornuiten(String path, String username) throws FileNotFoundException, IOException, SQLException {
 		
 		Connection c = getConnectionOra(path);
@@ -258,7 +349,16 @@ public class OracleJDBC {
 		
 	}
 	
-public static List<Afspraak> getAfspraken(String path, String username) throws FileNotFoundException, IOException, SQLException {
+	/**
+	 * Retrieves all appointments of the given user.
+	 * @param path Connection path to database
+	 * @param username String username
+	 * @return List with all appointments of a certain user
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
+	public static List<Afspraak> getAfspraken(String path, String username) throws FileNotFoundException, IOException, SQLException {
 		
 		Connection c = getConnectionOra(path);
 		PreparedStatement query = c
@@ -282,6 +382,14 @@ public static List<Afspraak> getAfspraken(String path, String username) throws F
 		return alle_Afspraken;
 	}
 	
+	/**
+	 * Creates a new appointment in the database.
+	 * @param path Connection path to database
+	 * @param afspraak New Afspraak object
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	public static void nieuweAfspraak(String path, Afspraak afspraak) throws FileNotFoundException, IOException,
 			SQLException {
 		Connection c = getConnectionOra(path);

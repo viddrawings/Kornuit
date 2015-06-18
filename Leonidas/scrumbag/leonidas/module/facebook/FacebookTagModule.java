@@ -10,6 +10,10 @@ import scrumbag.leonidas.module.Module;
 public class FacebookTagModule extends Module{
 
 	private static String FIELD = "/me?fields=tagged";
+	
+	/**
+	 * Retrieves all 'Kornuiten' and calculates their score based on FaceBook tags. When done it places them in the controller.
+	 */
 	@Override
 	public void calculate(Controller controller, String accessToken) {
 		JSONObject root = getJsonObject(accessToken, FIELD);

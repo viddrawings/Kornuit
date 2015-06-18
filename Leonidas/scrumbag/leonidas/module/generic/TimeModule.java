@@ -13,6 +13,9 @@ public class TimeModule extends Module {
 		SCORE_INDEX = 0;
 	}
 
+	/**
+	 * Retrieves all 'Kornuiten' and calculates their score based on the last time they had an appointment. When done it places them in the controller.
+	 */
 	@Override
 	public void calculate(Controller controller, String accessToken) {
 		float totalScore = 0f;

@@ -13,10 +13,18 @@ import org.json.JSONObject;
 public class FBGraph {
 	private String accessToken;
 
+	/**
+	 * Constructs a FBGraph with an access token.
+	 * @param accessToken Access token
+	 */
 	public FBGraph(String accessToken) {
 		this.accessToken = accessToken;
 	}
 
+	/**
+	 * Connect to FaceBook and retrieve logged in user's FaceBook information.
+	 * @return String
+	 */
 	public String getFBGraph() {
 		String graph = null;
 		try {
@@ -40,6 +48,10 @@ public class FBGraph {
 		return graph;
 	}
 	
+	/**
+	 * Connect to FaceBook and retrieve logged in user's FaceBook friends.
+	 * @return JSONObject
+	 */
 	public JSONObject getFBFriends() {
 		String friends = null;
 		JSONObject json = null;
@@ -64,6 +76,11 @@ public class FBGraph {
 		return json;
 	}
 
+	/**
+	 * Convert FaceBook data to a Map.
+	 * @param fbGraph received String from getFBGraph()
+	 * @return Map with String, String
+	 */
 	public Map<String, String> getGraphData(String fbGraph) {
 		Map<String, String> fbProfile = new HashMap<String, String>();
 		try {

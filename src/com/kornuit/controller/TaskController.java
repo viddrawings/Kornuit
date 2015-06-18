@@ -32,7 +32,12 @@ public class TaskController {
 	@Autowired
 	ServletContext context;
 
-
+	/**
+	 * Login with FaceBook.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return ModelAndView
+	 */
 	@RequestMapping("login")
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -58,6 +63,12 @@ public class TaskController {
 		return MV;
 	}
 
+	/**
+	 * Logs out currently logged in user.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return ModelAndView
+	 */
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -71,6 +82,15 @@ public class TaskController {
 		return MV;
 	}
 
+	/**
+	 * Checks if user is logged in, if true it sets all the appointments in the request and returns the URL to forward.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return String URL
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	@RequestMapping("mijnkornuit")
 	public String mijnKornuit(HttpServletRequest request,
 			HttpServletResponse response) throws FileNotFoundException, IOException, SQLException {
@@ -108,6 +128,13 @@ public class TaskController {
 		return "login";
 	}
 
+	/**
+	 * Sends a FaceBook URL where to user is able to log in to his FaceBook account to connect FaceBook to this application.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return String URL
+	 * @throws IOException throws IOException
+	 */
 	@RequestMapping("newfacebookaccount")
 	public String newfacebookaccount(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
@@ -129,6 +156,15 @@ public class TaskController {
 		return "accounts";
 	}
 
+	/**
+	 * Retrieves a FaceBook access token, and stores it into the database coupled with the username.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return String URL
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("datamapperfacebook")
 	public String datamapper(HttpServletRequest request,
@@ -158,6 +194,15 @@ public class TaskController {
 
 	}
 
+	/**
+	 * Deletes the already coupled FaceBook access token from the database.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return String URL
+	 * @throws FileNotFoundException throws FileNotFoundException
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("deletefacebookaccount")
 	public String deletefacebookaccount(HttpServletRequest request,
@@ -179,6 +224,14 @@ public class TaskController {
 		return "login";
 	}
 	
+	/**
+	 * Checks if the user has connected to Google, if not the user will be asked to login with his Google account, after that has successfully finished it will make a new appointment into Google Calendar.
+	 * @param request HttpServletRequest request
+	 * @param response HttpServletResponse response
+	 * @return String URL
+	 * @throws IOException throws IOException
+	 * @throws SQLException throws SQLException
+	 */
 	@RequestMapping("makecalendarevent")
 	public String makecalendarevent(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, SQLException {
